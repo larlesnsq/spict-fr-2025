@@ -7,17 +7,15 @@
 
   <style>
     :root{
-      /* Couleurs proches de la version imprimée */
-      --navy:#0a3e6d;           /* bandeaux bleu foncé */
-      --navy-2:#08355d;         /* variante foncée */
-      --line:#ffffff;           /* séparateurs internes */
-      --ice:#cfe6f3;            /* bleu clair des lignes */
+      --navy:#0a3e6d;
+      --line:#ffffff;
+      --ice:#cfe6f3;
       --bg:#ffffff;
-
       --text:#0f172a;
-      --max: 980px;
+
+      --max: 1100px; /* un peu plus large pour 3 colonnes */
       --border: 3px;
-      --radius: 0px;           /* la version imprimée est très “rectangulaire” */
+      --radius: 0px;
     }
 
     *{box-sizing:border-box}
@@ -25,31 +23,11 @@
       font:16px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"Noto Sans","Helvetica Neue",sans-serif;
     }
 
-    /* En-tête (images réduites) */
-    .page{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 16px 14px 40px;
-    }
-    .mast{
-      display:flex;
-      align-items:flex-end;
-      justify-content:flex-start;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-    .spict-logo{
-      width:min(360px, 100%);
-      height:auto;
-      display:block;
-    }
-    .top-rule{
-      height:10px;
-      background:var(--navy);
-      margin: 10px 0 18px;
-    }
+    .page{max-width: var(--max); margin: 0 auto; padding: 16px 14px 40px;}
+    .mast{display:flex; align-items:flex-end; justify-content:flex-start; gap:18px; flex-wrap:wrap;}
+    .spict-logo{width:min(340px, 100%); height:auto; display:block;}
+    .top-rule{height:10px; background:var(--navy); margin: 10px 0 18px;}
 
-    /* “Carte” principale encadrée comme le PDF */
     .card{
       border: var(--border) solid var(--navy);
       border-radius: var(--radius);
@@ -57,7 +35,6 @@
       background:#fff;
     }
 
-    /* Bandeau d’intro avec logo à droite */
     .intro{
       position:relative;
       padding: 14px 14px 12px;
@@ -70,18 +47,16 @@
       font-weight:700;
       color: var(--navy);
       letter-spacing: .1px;
-      padding-right: 170px; /* laisse de la place au logo */
+      padding-right: 170px;
     }
     .nhs{
       position:absolute;
       right:12px;
       top:10px;
-      width:150px;            /* réduit par rapport à avant */
+      width:140px; /* réduit */
       height:auto;
-      opacity:1;
     }
 
-    /* Bandeaux de section (bleu foncé, texte blanc) */
     .section-title{
       background: var(--navy);
       color: #fff;
@@ -92,7 +67,6 @@
       border-bottom: 2px solid var(--line);
     }
 
-    /* Lignes (comme un tableau) */
     .rows{background:#fff;}
     .row{
       background: var(--ice);
@@ -103,7 +77,6 @@
     }
     .row:last-child{border-bottom:none;}
 
-    /* Titres de sous-sections (Cancer, Démence/fragilité, etc.) */
     .subhead{
       background:#fff;
       color: var(--navy);
@@ -114,35 +87,34 @@
       border-bottom: 2px solid var(--line);
     }
 
-    /* Zone “indicateurs cliniques” en 2 colonnes sur écran large */
-    .two-col{
+    /* 3 colonnes pour la section 2 */
+    .three-col{
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr; /* mobile: 1 colonne */
     }
-    @media (min-width: 900px){
-      .two-col{grid-template-columns: 1fr 1fr;}
-      .col{
-        border-right: 2px solid var(--line);
+
+    .col{border-right:none;}
+    .col:last-child{border-right:none;}
+
+    /* Sur grand écran: 3 colonnes + séparateurs verticaux blancs */
+    @media (min-width: 1100px){
+      .three-col{grid-template-columns: 1fr 1fr 1fr;}
+      .col{border-right: 2px solid var(--line);}
+      .col:nth-child(3){border-right:none;}
+      .span-2-3{
+        grid-column: 2 / 4; /* s’étend sur colonnes 2 et 3 */
+        border-top: 2px solid var(--line);
       }
-      .col:last-child{border-right:none;}
     }
 
-    /* Liste “complications” (petits points dans la ligne bleu clair) */
-    .bullets{
-      margin: 8px 0 0 0;
-      padding: 0 0 0 18px;
-    }
-    .bullets li{
-      margin: 4px 0;
-    }
+    .bullets{margin: 8px 0 0 0; padding: 0 0 0 18px;}
+    .bullets li{margin: 4px 0;}
 
-    /* Section finale : mêmes lignes bleu clair */
     .small .row{font-size:18px}
 
-    /* Accessibilité + responsive texte */
     @media (max-width: 520px){
-      .intro p{font-size:20px;padding-right: 0;}
-      .nhs{position:static;width:140px;margin-top:10px;}
+      .intro p{font-size:20px; padding-right:0;}
+      .nhs{position:static; width:140px; margin-top:10px;}
       .section-title{font-size:18px}
       .row{font-size:16px}
       .subhead{font-size:26px}
@@ -153,24 +125,19 @@
 <body>
   <div class="page">
     <div class="mast">
-      <!-- Logo SPICT (vous pouvez le remplacer par une image locale si vous préférez) -->
       <img class="spict-logo" src="https://www.spict.org.uk/wp-content/uploads/sites/74/2025/03/20250130-SPICT_5-NoTM.png" alt="SPICT" />
     </div>
     <div class="top-rule" aria-hidden="true"></div>
 
     <div class="card" role="main" aria-label="SPICT-FR e-SPICT">
-      <!-- Bandeau d’introduction -->
       <div class="intro">
         <p>
           Le SPICT-FR™ est utilisé pour faciliter l'identification des personnes dont la santé se détériore,
           évaluer leurs besoins en soins palliatifs et planifier les soins actuels et futurs avec eux.
         </p>
-
-        <!-- Logo à droite (réduit) -->
         <img class="nhs" src="https://www.spict.org.uk/wp-content/uploads/sites/74/2025/04/20250429-UniAndNHSScot.png" alt="" />
       </div>
 
-      <!-- Section 1 -->
       <div class="section-title">Rechercher tout indicateur général d’une santé altérée ou en voie d’altération.</div>
       <div class="rows">
         <div class="row">Recours aux services d’urgences, consultations ou hospitalisations non programmées.</div>
@@ -181,11 +148,11 @@
         <div class="row">La personne (ou sa famille) est en demande de soins palliatifs ; elle choisit de réduire, d’arrêter ou de ne pas initier un traitement ; ou elle souhaite prioriser la qualité de vie.</div>
       </div>
 
-      <!-- Section 2 -->
       <div class="section-title">Rechercher tout indicateur de situation clinique réduisant l’espérance de vie.</div>
 
-      <div class="two-col">
-        <!-- Colonne gauche -->
+      <!-- SECTION 2 : 3 colonnes + "Autres affections" en bas sur colonnes 2 et 3 -->
+      <div class="three-col">
+        <!-- Colonne 1 -->
         <div class="col">
           <div class="subhead">Cancer</div>
           <div class="rows">
@@ -212,7 +179,7 @@
           </div>
         </div>
 
-        <!-- Colonne droite -->
+        <!-- Colonne 2 -->
         <div class="col">
           <div class="subhead">Maladie cardiaque et/ou vasculaire</div>
           <div class="rows">
@@ -226,7 +193,10 @@
             <div class="row">Hypoxie persistante nécessitant une oxygénothérapie au long cours.</div>
             <div class="row">Antécédent de ventilation pour une insuffisance respiratoire, ou présence de contre-indication(s) à la ventilation.</div>
           </div>
+        </div>
 
+        <!-- Colonne 3 -->
+        <div class="col">
           <div class="subhead">Maladie rénale chronique</div>
           <div class="rows">
             <div class="row">Maladie rénale chronique au stade 4 ou 5 (DFG &lt; 30ml/min) avec une altération de l’état de santé.</div>
@@ -248,7 +218,10 @@
             </div>
             <div class="row">Non éligible à une transplantation hépatique.</div>
           </div>
+        </div>
 
+        <!-- "Autres affections" en bas sur colonnes 2 et 3 (span) -->
+        <div class="span-2-3">
           <div class="subhead">Autres affections</div>
           <div class="rows">
             <div class="row">Dégradation de l’état général liée à des pathologies physiques ou psychologiques, des affections multiples et/ou des complications irréversibles.</div>
@@ -257,7 +230,6 @@
         </div>
       </div>
 
-      <!-- Section 3 -->
       <div class="section-title">Réévaluer la prise en charge actuelle et la planification des soins</div>
       <div class="rows small">
         <div class="row">Réévaluer la prise en charge actuelle ; réduire la polymédication. Décision partagée pour les traitements et les soins.</div>
