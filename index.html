@@ -2,243 +2,245 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>e-SPICT-FR | SPICT-FR™ 2025</title>
-
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>e-SPICT-FR 2025</title>
   <style>
     :root{
-      --navy:#0a3e6d;
-      --line:#ffffff;
-      --ice:#cfe6f3;
-      --bg:#ffffff;
-      --text:#0f172a;
-
-      --max: 1100px;
-      --border: 3px;
-      --radius: 0px;
+      --blue-dark:#033163;
+      --blue-mid:#b3d8e8;
+      --blue-light:#d7ebf2;
+      --border:#033163;
+      --text:#000;
+      --max:1100px;
     }
 
     *{box-sizing:border-box}
-    html,body{
-      margin:0;padding:0;background:var(--bg);color:var(--text);
-      font:16px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"Noto Sans","Helvetica Neue",sans-serif;
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:#fff;
     }
 
-    .page{max-width: var(--max); margin: 0 auto; padding: 16px 14px 40px;}
-    .mast{display:flex; align-items:flex-end; justify-content:flex-start; gap:18px; flex-wrap:wrap;}
-    .spict-logo{width:min(340px, 100%); height:auto; display:block;}
-    .top-rule{height:10px; background:var(--navy); margin: 10px 0 18px;}
+    .wrap{
+      max-width:var(--max);
+      margin:16px auto;
+      padding:0 12px;
+    }
+
+    .header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .header img{display:block; height:auto; width:auto;}
+    /* уменьшение фото в en-tête */
+    .logo-left{max-height:90px;}
+    .logo-right{max-height:55px;}
 
     .card{
-      border: var(--border) solid var(--navy);
-      border-radius: var(--radius);
-      overflow:hidden;
-      background:#fff;
+      border:2px solid var(--border);
+      border-top-width:12px;
+      border-bottom-width:16px;
+      padding:0;
+    }
+
+    .row{
+      padding:0;
     }
 
     .intro{
-      position:relative;
-      padding: 14px 14px 12px;
-      background:#fff;
-    }
-    .intro p{
-      margin:0;
-      font-size: 26px;
-      line-height:1.15;
-      font-weight:700;
-      color: var(--navy);
-      letter-spacing: .1px;
-      padding-right: 170px;
-    }
-    .nhs{
-      position:absolute;
-      right:12px;
-      top:10px;
-      width:140px;
-      height:auto;
+      padding:10px 10px 6px 10px;
+      font-size:16px;
+      line-height:1.35;
     }
 
     .section-title{
-      background: var(--navy);
-      color: #fff;
-      padding: 10px 12px;
-      font-size: 22px;
-      line-height:1.15;
-      border-top: 2px solid var(--line);
-      border-bottom: 2px solid var(--line);
-    }
-
-    .rows{background:#fff;}
-    .row{
-      background: var(--ice);
-      padding: 10px 12px;
-      border-bottom: 2px solid var(--line);
-      font-size: 18px;
+      background:var(--blue-dark);
+      color:#fff;
+      font-weight:700;
+      padding:8px 10px;
+      border-top:2px solid #fff;
+      border-bottom:2px solid #fff;
+      font-size:18px;
       line-height:1.25;
     }
-    .row:last-child{border-bottom:none;}
 
-    .subhead{
-      background:#fff;
-      color: var(--navy);
-      font-weight:800;
-      font-size: 34px;
-      line-height:1.05;
-      padding: 10px 12px 6px;
-      border-bottom: 2px solid var(--line);
-      margin:0; /* important: aucun espace au-dessus */
+    .item{
+      padding:8px 10px;
+      border-top:2px solid #fff;
+      border-bottom:2px solid #fff;
+      font-size:16px;
+      line-height:1.3;
     }
+    .item.mid{background:var(--blue-mid)}
+    .item.light{background:var(--blue-light)}
 
-    /* 3 colonnes */
-    .three-col{
+    .grid3{
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:0;
+      border-top:0;
     }
 
-    /* séparateurs verticaux sur large écran */
-    @media (min-width: 1100px){
-      .three-col{grid-template-columns: 1fr 1fr 1fr;}
-      .col{border-right: 2px solid var(--line);}
-      .col:nth-child(3){border-right:none;}
+    .col{
+      min-width:0;
+    }
+    /* séparateurs blancs verticaux comme l’original */
+    .col.col2, .col.col3{
+      border-left:8px solid #fff;
+    }
 
-      /* "Autres affections" à cheval sur col 2-3 */
-      .span-2-3{
-        grid-column: 2 / 4;
-        /* pas de bordure / marge / padding additionnels */
-        margin:0;
-        padding:0;
+    .cat{
+      font-weight:700;
+      color:var(--blue-dark);
+      padding:8px 10px 6px 10px;
+      font-size:18px;
+      line-height:1.2;
+      background:#fff;
+    }
+
+    /* “Autres affections” à cheval sur colonnes 2 et 3, sans espace */
+    .span23{
+      grid-column: 2 / 4;
+      border-left:8px solid #fff; /* aligne avec séparation de la colonne 2 */
+    }
+
+    ul.comp{
+      margin:6px 0 0 18px;
+      padding:0;
+    }
+    ul.comp li{margin:2px 0}
+
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 10px 12px 10px;
+      font-size:14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .logo-right{display:none;}
+      .grid3{
+        grid-template-columns:1fr;
       }
-    }
-
-    .bullets{margin: 8px 0 0 0; padding: 0 0 0 18px;}
-    .bullets li{margin: 4px 0;}
-
-    .small .row{font-size:18px}
-
-    @media (max-width: 520px){
-      .intro p{font-size:20px; padding-right:0;}
-      .nhs{position:static; width:140px; margin-top:10px;}
-      .section-title{font-size:18px}
-      .row{font-size:16px}
-      .subhead{font-size:26px}
+      .col.col2, .col.col3{
+        border-left:0;
+      }
+      .span23{
+        grid-column:auto;
+        border-left:0;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
-    <div class="mast">
-      <img class="spict-logo" src="https://www.spict.org.uk/wp-content/uploads/sites/74/2025/03/20250130-SPICT_5-NoTM.png" alt="SPICT" />
+  <div class="wrap">
+    <div class="header">
+      <!-- Vous pouvez remplacer/retirer ces images si besoin -->
+      <img class="logo-left" src="https://www.spict.org.uk/wp-content/uploads/sites/74/2025/03/20250130-SPICT_5-NoTM.png" alt="SPICT" />
+      <img class="logo-right" src="https://www.spict.org.uk/wp-content/uploads/sites/74/2025/04/20250429-UniAndNHSScot.png" alt="" />
     </div>
-    <div class="top-rule" aria-hidden="true"></div>
 
-    <div class="card" role="main" aria-label="SPICT-FR e-SPICT">
+    <div class="card">
       <div class="intro">
-        <p>
+        <p style="margin:0 0 6px 0;font-weight:700;">Outil d’indicateurs de soins palliatifs et de support (SPICT-FR™)</p>
+        <p style="margin:0;">
           Le SPICT-FR™ est utilisé pour faciliter l'identification des personnes dont la santé se détériore,
           évaluer leurs besoins en soins palliatifs et planifier les soins actuels et futurs avec eux.
         </p>
-        <img class="nhs" src="https://www.spict.org.uk/wp-content/uploads/sites/74/2025/04/20250429-UniAndNHSScot.png" alt="" />
       </div>
 
       <div class="section-title">Rechercher tout indicateur général d’une santé altérée ou en voie d’altération.</div>
-      <div class="rows">
-        <div class="row">Recours aux services d’urgences, consultations ou hospitalisations non programmées.</div>
-        <div class="row">Dépendance fonctionnelle ou pertes fonctionnelles avec une réversibilité limitée (la personne reste souvent confinée au lit ou au fauteuil plus de la moitié de la journée).</div>
-        <div class="row">Dépend davantage des autres pour ses soins, en raison de la détérioration de la santé physique et/ou psychologique. L’aidant principal requiert davantage d’aide et de soutien.</div>
-        <div class="row">Perte de poids progressive et/ou persistante ; faible masse musculaire.</div>
-        <div class="row">Symptômes persistants malgré un traitement optimal de la (ou des) affection(s).</div>
-        <div class="row">La personne (ou sa famille) est en demande de soins palliatifs ; elle choisit de réduire, d’arrêter ou de ne pas initier un traitement ; ou elle souhaite prioriser la qualité de vie.</div>
-      </div>
+      <div class="item mid">● Recours aux services d’urgences, consultations ou hospitalisations non programmées.</div>
+      <div class="item light">● Dépendance fonctionnelle ou pertes fonctionnelles avec une réversibilité limitée (la personne reste souvent confinée au lit ou au fauteuil plus de la moitié de la journée).</div>
+      <div class="item mid">● Dépend davantage des autres pour ses soins, en raison de la détérioration de la santé physique et/ou psychologique. L’aidant principal requiert davantage d’aide et de soutien.</div>
+      <div class="item light">● Perte de poids progressive et/ou persistante ; faible masse musculaire.</div>
+      <div class="item mid">● Symptômes persistants malgré un traitement optimal de la (ou des) affection(s).</div>
+      <div class="item light">● La personne (ou sa famille) est en demande de soins palliatifs ; elle choisit de réduire, d’arrêter ou de ne pas initier un traitement ; ou elle souhaite prioriser la qualité de vie.</div>
 
       <div class="section-title">Rechercher tout indicateur de situation clinique réduisant l’espérance de vie.</div>
 
-      <div class="three-col">
-        <!-- Colonne 1 -->
-        <div class="col">
-          <div class="subhead">Cancer</div>
-          <div class="rows">
-            <div class="row">Déclin fonctionnel dû à un cancer évolutif.</div>
-            <div class="row">Patient trop vulnérable pour le traitement du cancer ou traitement envisagé à visée symptomatique.</div>
-          </div>
+      <div class="grid3">
+        <!-- COLONNE 1 -->
+        <div class="col col1">
+          <div class="cat">Cancer</div>
+          <div class="item light">Déclin fonctionnel dû à un cancer évolutif.</div>
+          <div class="item mid">Patient trop vulnérable pour le traitement du cancer ou traitement envisagé à visée symptomatique.</div>
 
-          <div class="subhead">Démence/fragilité</div>
-          <div class="rows">
-            <div class="row">Ne peut s’habiller, marcher ou manger sans l’aide d’un tiers.</div>
-            <div class="row">Mange et boit moins ; troubles de déglutition.</div>
-            <div class="row">Incontinence urinaire et/ou fécale.</div>
-            <div class="row">N’est plus capable de communiquer par la parole ; peu d’interactions sociales.</div>
-            <div class="row">Chutes à répétition ; fracture fémorale.</div>
-            <div class="row">Infections ou états fébriles à répétition ; pneumopathie d’inhalation.</div>
-          </div>
+          <div class="cat">Démence/fragilité</div>
+          <div class="item light">Ne peut s’habiller, marcher ou manger sans l’aide d’un tiers.</div>
+          <div class="item mid">Mange et boit moins ; troubles de déglutition.</div>
+          <div class="item light">Incontinence urinaire et/ou fécale.</div>
+          <div class="item mid">N’est plus capable de communiquer par la parole ; peu d’interactions sociales.</div>
+          <div class="item light">Chutes à répétition ; fracture fémorale.</div>
+          <div class="item mid">Infections ou états fébriles à répétition ; pneumopathie d’inhalation.</div>
 
-          <div class="subhead">Maladie neurologique</div>
-          <div class="rows">
-            <div class="row">Altération progressive des fonctions physiques et/ou cognitives malgré une prise en charge optimale.</div>
-            <div class="row">Troubles de la parole avec altération progressive de la communication et/ou troubles de déglutition évolutifs.</div>
-            <div class="row">Pneumopathies d’inhalation à répétition ; dyspnée ou insuffisance respiratoire.</div>
-            <div class="row">Incapacité(s) suite à un ou plusieurs accidents vasculaires cérébraux avec une dégradation de l’état physique et/ou psychologique.</div>
-          </div>
+          <div class="cat">Maladie cardiaque et/ou vasculaire</div>
+          <div class="item light">Insuffisance cardiaque ou coronaropathie évoluée et incurable, avec dyspnée ou douleur thoracique au repos ou lors d’un effort minime.</div>
+          <div class="item mid">Maladie vasculaire périphérique sévère et inopérable.</div>
         </div>
 
-        <!-- Colonne 2 -->
-        <div class="col">
-          <div class="subhead">Maladie cardiaque et/ou vasculaire</div>
-          <div class="rows">
-            <div class="row">Insuffisance cardiaque ou coronaropathie évoluée et incurable, avec dyspnée ou douleur thoracique au repos ou lors d’un effort minime.</div>
-            <div class="row">Maladie vasculaire périphérique sévère et inopérable.</div>
-          </div>
+        <!-- COLONNE 2 -->
+        <div class="col col2">
+          <div class="cat">Maladie neurologique</div>
+          <div class="item light">Altération progressive des fonctions physiques et/ou cognitives malgré une prise en charge optimale.</div>
+          <div class="item mid">Troubles de la parole avec altération progressive de la communication et/ou troubles de déglutition évolutifs.</div>
+          <div class="item light">Pneumopathies d’inhalation à répétition ; dyspnée ou insuffisance respiratoire.</div>
+          <div class="item mid">Incapacité(s) suite à un ou plusieurs accidents vasculaires cérébraux avec une dégradation de l’état physique et/ou psychologique.</div>
 
-          <div class="subhead">Maladie respiratoire</div>
-          <div class="rows">
-            <div class="row">Maladie respiratoire chronique sévère, avec dyspnée au repos ou pour un effort minime entre les décompensations aiguës.</div>
-            <div class="row">Hypoxie persistante nécessitant une oxygénothérapie au long cours.</div>
-            <div class="row">Antécédent de ventilation pour une insuffisance respiratoire, ou présence de contre-indication(s) à la ventilation.</div>
-          </div>
+          <div class="cat">Maladie respiratoire</div>
+          <div class="item light">Maladie respiratoire chronique sévère, avec dyspnée au repos ou pour un effort minime entre les décompensations aiguës.</div>
+          <div class="item mid">Hypoxie persistante nécessitant une oxygénothérapie au long cours.</div>
+          <div class="item light">Antécédent de ventilation pour une insuffisance respiratoire, ou présence de contre-indication(s) à la ventilation.</div>
         </div>
 
-        <!-- Colonne 3 -->
-        <div class="col">
-          <div class="subhead">Maladie rénale chronique</div>
-          <div class="rows">
-            <div class="row">Maladie rénale chronique au stade 4 ou 5 (DFG &lt; 30ml/min) avec une altération de l’état de santé.</div>
-            <div class="row">Insuffisance rénale compliquant d’autres affections et/ou leur(s) traitement(s), réduisant l’espérance de vie.</div>
-            <div class="row">Arrêt ou non mise en œuvre de la dialyse.</div>
-          </div>
+        <!-- COLONNE 3 -->
+        <div class="col col3">
+          <div class="cat">Maladie rénale chronique</div>
+          <div class="item light">Maladie rénale chronique au stade 4 ou 5 (DFG &lt; 30ml/min) avec une altération de l’état de santé.</div>
+          <div class="item mid">Insuffisance rénale compliquant d’autres affections et/ou leur(s) traitement(s), réduisant l’espérance de vie.</div>
+          <div class="item light">Arrêt ou non mise en œuvre de la dialyse.</div>
 
-          <div class="subhead">Maladie hépatique chronique</div>
-          <div class="rows">
-            <div class="row">
-              Cirrhose une ou plusieurs complications au cours de l’année passée :
-              <ul class="bullets">
-                <li>ascite réfractaire</li>
-                <li>encéphalopathie hépatique</li>
-                <li>syndrome hépatorénal</li>
-                <li>infection du liquide d’ascite</li>
-                <li>hémorragies répétées de varices oesophagiennes</li>
-              </ul>
-            </div>
-            <div class="row">Non éligible à une transplantation hépatique.</div>
+          <div class="cat">Maladie hépatique chronique</div>
+          <div class="item light">
+            Cirrhose une ou plusieurs complications au cours de l’année passée :
+            <ul class="comp">
+              <li>ascite réfractaire</li>
+              <li>encéphalopathie hépatique</li>
+              <li>syndrome hépatorénal</li>
+              <li>infection du liquide d’ascite</li>
+              <li>hémorragies répétées de varices oesophagiennes</li>
+            </ul>
           </div>
+          <div class="item mid">Non éligible à une transplantation hépatique.</div>
         </div>
 
-        <!-- Autres affections : à cheval sur colonnes 2 et 3, collé (pas d'espace ajouté) -->
-        <div class="span-2-3">
-          <div class="subhead">Autres affections</div>
-          <div class="rows">
-            <div class="row">Dégradation de l’état général liée à des pathologies physiques ou psychologiques, des affections multiples et/ou des complications irréversibles.</div>
-            <div class="row">Les traitements disponibles ont un rapport bénéfice/risque défavorable.</div>
+        <!-- AUTRES AFFECTIONS (span colonnes 2 et 3, sans espace) -->
+        <div class="span23">
+          <div class="cat">Autres affections</div>
+          <div class="item light">
+            Dégradation de l’état général liée à des pathologies physiques ou psychologiques, des affections multiples et/ou des complications irréversibles.
+            Les traitements disponibles ont un rapport bénéfice/risque défavorable.
           </div>
         </div>
       </div>
 
       <div class="section-title">Réévaluer la prise en charge actuelle et la planification des soins</div>
-      <div class="rows small">
-        <div class="row">Réévaluer la prise en charge actuelle ; réduire la polymédication. Décision partagée pour les traitements et les soins.</div>
-        <div class="row">Réévaluer la prise en charge globale, les symptômes, les besoins émotionnels, sociaux, financiers et spirituels. Soutien aux familles, proches et aidants.</div>
-        <div class="row">Demander un avis spécialisé ou une réévaluation si la gestion des symptômes ou autres besoins est complexe.</div>
-        <div class="row">Convenir avec le patient et sa famille du plan de soins actuel et à venir. Aborder les décisions à venir (par exemple rédaction des directives anticipées, désignation d’une personne de confiance).</div>
-        <div class="row">Consigner, partager et réévaluer les plans de soins.</div>
+      <div class="item mid">● Réévaluer la prise en charge actuelle ; réduire la polymédication. Décision partagée pour les traitements et les soins.</div>
+      <div class="item light">● Réévaluer la prise en charge globale, les symptômes, les besoins émotionnels, sociaux, financiers et spirituels. Soutien aux familles, proches et aidants.</div>
+      <div class="item mid">● Demander un avis spécialisé ou une réévaluation si la gestion des symptômes ou autres besoins est complexe.</div>
+      <div class="item light">● Convenir avec le patient et sa famille du plan de soins actuel et à venir. Aborder les décisions à venir (par exemple rédaction des directives anticipées, désignation d’une personne de confiance).</div>
+      <div class="item mid">● Consigner, partager et réévaluer les plans de soins.</div>
+
+      <div class="footer">
+        <div> </div>
+        <div style="text-align:right;">SPICT 2025</div>
       </div>
     </div>
   </div>
