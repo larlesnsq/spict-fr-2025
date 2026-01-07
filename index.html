@@ -13,13 +13,14 @@
       --bg:#ffffff;
       --text:#0f172a;
 
-      --max: 1100px; /* un peu plus large pour 3 colonnes */
+      --max: 1100px;
       --border: 3px;
       --radius: 0px;
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+    html,body{
+      margin:0;padding:0;background:var(--bg);color:var(--text);
       font:16px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"Noto Sans","Helvetica Neue",sans-serif;
     }
 
@@ -53,7 +54,7 @@
       position:absolute;
       right:12px;
       top:10px;
-      width:140px; /* réduit */
+      width:140px;
       height:auto;
     }
 
@@ -85,25 +86,27 @@
       line-height:1.05;
       padding: 10px 12px 6px;
       border-bottom: 2px solid var(--line);
+      margin:0; /* important: aucun espace au-dessus */
     }
 
-    /* 3 colonnes pour la section 2 */
+    /* 3 colonnes */
     .three-col{
       display:grid;
-      grid-template-columns: 1fr; /* mobile: 1 colonne */
+      grid-template-columns: 1fr;
     }
 
-    .col{border-right:none;}
-    .col:last-child{border-right:none;}
-
-    /* Sur grand écran: 3 colonnes + séparateurs verticaux blancs */
+    /* séparateurs verticaux sur large écran */
     @media (min-width: 1100px){
       .three-col{grid-template-columns: 1fr 1fr 1fr;}
       .col{border-right: 2px solid var(--line);}
       .col:nth-child(3){border-right:none;}
+
+      /* "Autres affections" à cheval sur col 2-3 */
       .span-2-3{
-        grid-column: 2 / 4; /* s’étend sur colonnes 2 et 3 */
-        border-top: 2px solid var(--line);
+        grid-column: 2 / 4;
+        /* pas de bordure / marge / padding additionnels */
+        margin:0;
+        padding:0;
       }
     }
 
@@ -150,7 +153,6 @@
 
       <div class="section-title">Rechercher tout indicateur de situation clinique réduisant l’espérance de vie.</div>
 
-      <!-- SECTION 2 : 3 colonnes + "Autres affections" en bas sur colonnes 2 et 3 -->
       <div class="three-col">
         <!-- Colonne 1 -->
         <div class="col">
@@ -220,7 +222,7 @@
           </div>
         </div>
 
-        <!-- "Autres affections" en bas sur colonnes 2 et 3 (span) -->
+        <!-- Autres affections : à cheval sur colonnes 2 et 3, collé (pas d'espace ajouté) -->
         <div class="span-2-3">
           <div class="subhead">Autres affections</div>
           <div class="rows">
