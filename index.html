@@ -36,7 +36,6 @@
       margin-bottom:10px;
     }
     .header img{display:block; height:auto; width:auto;}
-    /* уменьшение фото в en-tête */
     .logo-left{max-height:90px;}
     .logo-right{max-height:55px;}
 
@@ -44,10 +43,6 @@
       border:2px solid var(--border);
       border-top-width:12px;
       border-bottom-width:16px;
-      padding:0;
-    }
-
-    .row{
       padding:0;
     }
 
@@ -68,7 +63,12 @@
       line-height:1.25;
     }
 
+    /* ===== Items with right icon (robust, no float) ===== */
     .item{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
       padding:8px 10px;
       border-top:2px solid #fff;
       border-bottom:2px solid #fff;
@@ -78,6 +78,32 @@
     .item.mid{background:var(--blue-mid)}
     .item.light{background:var(--blue-light)}
 
+    .item .txt{
+      flex:1 1 auto;
+      min-width:0;
+    }
+
+    .item .icon{
+      flex:0 0 auto;
+      width:22px;
+      height:22px;
+      object-fit:contain;
+      margin-left:6px;
+      /* alignement vertical fin, surtout quand texte multi-lignes */
+      margin-top:1px;
+    }
+
+    /* When you need the icon aligned to top even with lists */
+    .item.has-list{align-items:flex-start}
+
+    /* Lists inside items */
+    .item ul.comp{
+      margin:6px 0 0 18px;
+      padding:0;
+    }
+    .item ul.comp li{margin:2px 0}
+
+    /* Grid */
     .grid3{
       display:grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -85,13 +111,8 @@
       border-top:0;
     }
 
-    .col{
-      min-width:0;
-    }
-    /* séparateurs blancs verticaux comme l’original */
-    .col.col2, .col.col3{
-      border-left:8px solid #fff;
-    }
+    .col{min-width:0}
+    .col.col2, .col.col3{border-left:8px solid #fff;}
 
     .cat{
       font-weight:700;
@@ -102,17 +123,10 @@
       background:#fff;
     }
 
-    /* “Autres affections” à cheval sur colonnes 2 et 3, sans espace */
     .span23{
       grid-column: 2 / 4;
-      border-left:8px solid #fff; /* aligne avec séparation de la colonne 2 */
+      border-left:8px solid #fff;
     }
-
-    ul.comp{
-      margin:6px 0 0 18px;
-      padding:0;
-    }
-    ul.comp li{margin:2px 0}
 
     .footer{
       display:flex;
@@ -125,16 +139,9 @@
     /* Responsive */
     @media (max-width: 980px){
       .logo-right{display:none;}
-      .grid3{
-        grid-template-columns:1fr;
-      }
-      .col.col2, .col.col3{
-        border-left:0;
-      }
-      .span23{
-        grid-column:auto;
-        border-left:0;
-      }
+      .grid3{grid-template-columns:1fr;}
+      .col.col2, .col.col3{border-left:0;}
+      .span23{grid-column:auto;border-left:0;}
     }
   </style>
 </head>
@@ -142,27 +149,49 @@
 <body>
   <div class="wrap">
     <div class="header">
-      <!-- Vous pouvez remplacer/retirer ces images si besoin -->
       <img class="logo-left" src="https://www.spict.org.uk/wp-content/uploads/sites/74/2025/03/20250130-SPICT_5-NoTM.png" alt="SPICT" />
-      <img class="logo-right" src="https://www.spict.org.uk/wp-content/uploads/sites/74/2025/04/20250429-UniAndNHSScot.png" alt="" />
     </div>
+        <p style="margin:0 0 6px 0;font-weight:700;font-size:30px;color:var(--blue-dark)">Outil d’indicateurs de soins palliatifs et de support (SPICT-FR)</p>
 
     <div class="card">
       <div class="intro">
-        <p style="margin:0 0 6px 0;font-weight:700;">Outil d’indicateurs de soins palliatifs et de support (SPICT-FR™)</p>
-        <p style="margin:0;">
-          Le SPICT-FR™ est utilisé pour faciliter l'identification des personnes dont la santé se détériore,
+        <p style="margin:0;font-size:20px;font-weight:bold;color:var(--blue-dark)">
+          Le SPICT-FR est utilisé pour faciliter l'identification des personnes dont la santé se détériore,
           évaluer leurs besoins en soins palliatifs et planifier les soins actuels et futurs avec eux.
         </p>
       </div>
 
       <div class="section-title">Rechercher tout indicateur général d’une santé altérée ou en voie d’altération.</div>
-      <div class="item mid">● Recours aux services d’urgences, consultations ou hospitalisations non programmées.</div>
-      <div class="item light">● Dépendance fonctionnelle ou pertes fonctionnelles avec une réversibilité limitée (la personne reste souvent confinée au lit ou au fauteuil plus de la moitié de la journée).</div>
-      <div class="item mid">● Dépend davantage des autres pour ses soins, en raison de la détérioration de la santé physique et/ou psychologique. L’aidant principal requiert davantage d’aide et de soutien.</div>
-      <div class="item light">● Perte de poids progressive et/ou persistante ; faible masse musculaire.</div>
-      <div class="item mid">● Symptômes persistants malgré un traitement optimal de la (ou des) affection(s).</div>
-      <div class="item light">● La personne (ou sa famille) est en demande de soins palliatifs ; elle choisit de réduire, d’arrêter ou de ne pas initier un traitement ; ou elle souhaite prioriser la qualité de vie.</div>
+
+      <div class="item mid">
+        <div class="txt">Recours aux services d’urgences, consultations ou hospitalisations non programmées.</div>
+        <img class="icon" src="/number-1.png" alt="1" />
+      </div>
+
+      <div class="item light">
+        <div class="txt">Dépendance fonctionnelle ou pertes fonctionnelles avec une réversibilité limitée (la personne reste souvent confinée au lit ou au fauteuil plus de la moitié de la journée).</div>
+        <img class="icon" src="/number-2.png" alt="2" />
+      </div>
+
+      <div class="item mid">
+        <div class="txt">Dépend davantage des autres pour ses soins, en raison de la détérioration de la santé physique et/ou psychologique. L'aidant principal requiert davantage d'aide et de soutien.</div>
+        <img class="icon" src="/number-3.png" alt="3" />
+      </div>
+
+      <div class="item light">
+        <div class="txt">Perte de poids progressive et/ou persistante ; faible masse musculaire.</div>
+        <img class="icon" src="/number-4.png" alt="4" />
+      </div>
+
+      <div class="item mid">
+        <div class="txt">Symptômes persistants malgré un traitement optimal de la (ou des) affection(s).</div>
+        <img class="icon" src="/number-5.png" alt="5" />
+      </div>
+
+      <div class="item light">
+        <div class="txt">La personne (ou sa famille) est en demande de soins palliatifs ; elle choisit de réduire, d'arrêter ou de ne pas initier un traitement ; ou elle souhaite prioriser la qualité de vie.</div>
+        <img class="icon" src="/number-6.png" alt="6" />
+      </div>
 
       <div class="section-title">Rechercher tout indicateur de situation clinique réduisant l’espérance de vie.</div>
 
@@ -170,77 +199,168 @@
         <!-- COLONNE 1 -->
         <div class="col col1">
           <div class="cat">Cancer</div>
-          <div class="item light">Déclin fonctionnel dû à un cancer évolutif.</div>
-          <div class="item mid">Patient trop vulnérable pour le traitement du cancer ou traitement envisagé à visée symptomatique.</div>
+
+          <div class="item light">
+            <div class="txt">Déclin fonctionnel dû à un cancer évolutif.</div>
+            <img class="icon" src="/number-7.png" alt="7" />
+          </div>
+
+          <div class="item mid">
+            <div class="txt">Patient trop vulnérable pour le traitement du cancer ou traitement envisagé à visée symptomatique.</div>
+            <img class="icon" src="/number-8.png" alt="8" />
+          </div>
 
           <div class="cat">Démence/fragilité</div>
-          <div class="item light">Ne peut s’habiller, marcher ou manger sans l’aide d’un tiers.</div>
-          <div class="item mid">Mange et boit moins ; troubles de déglutition.</div>
-          <div class="item light">Incontinence urinaire et/ou fécale.</div>
-          <div class="item mid">N’est plus capable de communiquer par la parole ; peu d’interactions sociales.</div>
-          <div class="item light">Chutes à répétition ; fracture fémorale.</div>
-          <div class="item mid">Infections ou états fébriles à répétition ; pneumopathie d’inhalation.</div>
+
+          <div class="item light">
+            <div class="txt">Ne peut s'habiller, marcher ou manger sans l'aide d'un tiers.</div>
+            <img class="icon" src="/number-9.png" alt="9" />
+          </div>
+
+          <div class="item mid">
+            <div class="txt">Mange et boit moins ; troubles de déglutition.</div>
+            <img class="icon" src="/number-10.png" alt="10" />
+          </div>
+
+          <div class="item light">
+            <div class="txt">Incontinence urinaire et/ou fécale.</div>
+            <img class="icon" src="/number-11.png" alt="11" />
+          </div>
+
+          <div class="item mid">
+            <div class="txt">N'est plus capable de communiquer par la parole ; peu d'interactions sociales.</div>
+            <img class="icon" src="/number-12.png" alt="12" />
+          </div>
+
+          <div class="item light">
+            <div class="txt">Chutes à répétition ; fracture fémorale.</div>
+            <img class="icon" src="/number-13.png" alt="13" />
+          </div>
+
+          <div class="item mid">
+            <div class="txt">Infections ou états fébriles à répétition ; pneumopathie d'inhalation.</div>
+            <img class="icon" src="/number-14.png" alt="14" />
+          </div>
 
           <div class="cat">Maladie cardiaque et/ou vasculaire</div>
-          <div class="item light">Insuffisance cardiaque ou coronaropathie évoluée et incurable, avec dyspnée ou douleur thoracique au repos ou lors d’un effort minime.</div>
-          <div class="item mid">Maladie vasculaire périphérique sévère et inopérable.</div>
+
+          <div class="item light">
+            <div class="txt">Insuffisance cardiaque ou coronaropathie évoluée et incurable, avec dyspnée ou douleur thoracique au repos ou lors d'un effort minime.</div>
+            <img class="icon" src="/number-15.png" alt="15" />
+          </div>
+
+          <div class="item mid">
+            <div class="txt">Maladie vasculaire périphérique sévère et inopérable.</div>
+            <img class="icon" src="/number-16.png" alt="16" />
+          </div>
         </div>
 
         <!-- COLONNE 2 -->
         <div class="col col2">
           <div class="cat">Maladie neurologique</div>
-          <div class="item light">Altération progressive des fonctions physiques et/ou cognitives malgré une prise en charge optimale.</div>
-          <div class="item mid">Troubles de la parole avec altération progressive de la communication et/ou troubles de déglutition évolutifs.</div>
-          <div class="item light">Pneumopathies d’inhalation à répétition ; dyspnée ou insuffisance respiratoire.</div>
-          <div class="item mid">Incapacité(s) suite à un ou plusieurs accidents vasculaires cérébraux avec une dégradation de l’état physique et/ou psychologique.</div>
+
+          <div class="item light">
+            <div class="txt">Altération progressive des fonctions physiques et/ou cognitives malgré une prise en charge optimale.</div>
+            <img class="icon" src="/number-17.png" alt="17" />
+          </div>
+
+          <div class="item mid">
+            <div class="txt">Troubles de la parole avec altération progressive de la communication et/ou troubles de déglutition évolutifs.</div>
+            <img class="icon" src="/number-18.png" alt="18" />
+          </div>
+
+          <div class="item light">
+            <div class="txt">Pneumopathies d'inhalation à répétition ; dyspnée ou insuffisance respiratoire.</div>
+            <img class="icon" src="/number-19.png" alt="19" />
+          </div>
+
+          <div class="item mid">
+            <div class="txt">Incapacité(s) suite à un ou plusieurs accidents vasculaires cérébraux avec une dégradation de l'état physique et/ou psychologique.</div>
+            <img class="icon" src="/number-20.png" alt="20" />
+          </div>
 
           <div class="cat">Maladie respiratoire</div>
-          <div class="item light">Maladie respiratoire chronique sévère, avec dyspnée au repos ou pour un effort minime entre les décompensations aiguës.</div>
-          <div class="item mid">Hypoxie persistante nécessitant une oxygénothérapie au long cours.</div>
-          <div class="item light">Antécédent de ventilation pour une insuffisance respiratoire, ou présence de contre-indication(s) à la ventilation.</div>
+
+          <div class="item light">
+            <div class="txt">Maladie respiratoire chronique sévère, avec dyspnée au repos ou pour un effort minime entre les décompensations aiguës.</div>
+            <img class="icon" src="/number-21.png" alt="21" />
+          </div>
+
+          <div class="item mid">
+            <div class="txt">Hypoxie persistante nécessitant une oxygénothérapie au long cours.</div>
+            <img class="icon" src="/number-22.png" alt="22" />
+          </div>
+
+          <div class="item light">
+            <div class="txt">Antécédent de ventilation pour une insuffisance respiratoire, ou présence de contre-indication(s) à la ventilation.</div>
+            <img class="icon" src="/number-23.png" alt="23" />
+          </div>
         </div>
 
         <!-- COLONNE 3 -->
         <div class="col col3">
           <div class="cat">Maladie rénale chronique</div>
-          <div class="item light">Maladie rénale chronique au stade 4 ou 5 (DFG &lt; 30ml/min) avec une altération de l’état de santé.</div>
-          <div class="item mid">Insuffisance rénale compliquant d’autres affections et/ou leur(s) traitement(s), réduisant l’espérance de vie.</div>
-          <div class="item light">Arrêt ou non mise en œuvre de la dialyse.</div>
+
+          <div class="item light">
+            <div class="txt">Maladie rénale chronique au stade 4 ou 5 (DFG &lt; 30ml/min) avec une altération de l'état de santé.</div>
+            <img class="icon" src="/number-24.png" alt="24" />
+          </div>
+
+          <div class="item mid">
+            <div class="txt">Insuffisance rénale compliquant d'autres affections et/ou leur(s) traitement(s), réduisant l'espérance de vie.</div>
+            <img class="icon" src="/number-25.png" alt="25" />
+          </div>
+
+          <div class="item light">
+            <div class="txt">Arrêt ou non mise en œuvre de la dialyse.</div>
+            <img class="icon" src="/26.png" alt="26" />
+          </div>
 
           <div class="cat">Maladie hépatique chronique</div>
-          <div class="item light">
-            Cirrhose une ou plusieurs complications au cours de l’année passée :
-            <ul class="comp">
-              <li>ascite réfractaire</li>
-              <li>encéphalopathie hépatique</li>
-              <li>syndrome hépatorénal</li>
-              <li>infection du liquide d’ascite</li>
-              <li>hémorragies répétées de varices oesophagiennes</li>
-            </ul>
+
+          <div class="item light has-list">
+            <div class="txt">
+              Cirrhose avec une ou plusieurs complications au cours de l’année passée :
+              <ul class="comp">
+                <li>ascite réfractaire</li>
+                <li>encéphalopathie hépatique</li>
+                <li>syndrome hépatorénal</li>
+                <li>infection du liquide d’ascite</li>
+                <li>hémorragies répétées de varices oesophagiennes</li>
+              </ul>
+            </div>
+            <img class="icon" src="/27.png" alt="27" />
           </div>
-          <div class="item mid">Non éligible à une transplantation hépatique.</div>
+
+          <div class="item mid">
+            <div class="txt">Non éligible à une transplantation hépatique.</div>
+            <img class="icon" src="/28.png" alt="28" />
+          </div>
         </div>
 
         <!-- AUTRES AFFECTIONS (span colonnes 2 et 3, sans espace) -->
         <div class="span23">
           <div class="cat">Autres affections</div>
           <div class="item light">
-            Dégradation de l’état général liée à des pathologies physiques ou psychologiques, des affections multiples et/ou des complications irréversibles.
-            Les traitements disponibles ont un rapport bénéfice/risque défavorable.
+            <div class="txt">
+              Dégradation de l’état général liée à des pathologies physiques ou psychologiques, des affections multiples et/ou des complications irréversibles.
+              Les traitements disponibles ont un rapport bénéfice/risque défavorable.
+            </div>
+            <img class="icon" src="/29.png" alt="29" />
           </div>
         </div>
       </div>
 
       <div class="section-title">Réévaluer la prise en charge actuelle et la planification des soins</div>
-      <div class="item mid">● Réévaluer la prise en charge actuelle ; réduire la polymédication. Décision partagée pour les traitements et les soins.</div>
-      <div class="item light">● Réévaluer la prise en charge globale, les symptômes, les besoins émotionnels, sociaux, financiers et spirituels. Soutien aux familles, proches et aidants.</div>
-      <div class="item mid">● Demander un avis spécialisé ou une réévaluation si la gestion des symptômes ou autres besoins est complexe.</div>
-      <div class="item light">● Convenir avec le patient et sa famille du plan de soins actuel et à venir. Aborder les décisions à venir (par exemple rédaction des directives anticipées, désignation d’une personne de confiance).</div>
-      <div class="item mid">● Consigner, partager et réévaluer les plans de soins.</div>
+      <div class="item mid"><div class="txt">Réévaluer la prise en charge actuelle ; réduire la polymédication. Prise de décision partagée pour les traitements et les soins.</div></div>
+      <div class="item light"><div class="txt">Réévaluer la prise en charge globale, les symptômes, les besoins émotionnels, sociaux, financiers et spirituels. Soutien aux familles, proches et aidants.</div></div>
+      <div class="item mid"><div class="txt">Demander un avis spécialisé ou une réévaluation si la gestion des symptômes ou autres besoins est complexe.</div></div>
+      <div class="item light"><div class="txt">Convenir avec le patient/sa famille du plan de soins actuel et à venir. Aborder les décisions à venir (par exemple rédaction des directives anticipées, désignation d'une personne de confiance).</div></div>
+      <div class="item mid"><div class="txt">Consigner, partager et réévaluer les plans de soins.</div></div>
 
       <div class="footer">
-        <div> </div>
-        <div style="text-align:right;">SPICT 2025</div>
+        <div></div>
+        <div style="text-align:right;">SPICT-FR 2025</div>
       </div>
     </div>
   </div>
